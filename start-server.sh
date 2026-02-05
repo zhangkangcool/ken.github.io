@@ -5,10 +5,17 @@ echo "=========================================="
 echo "  红警2网页版 - 本地服务器"
 echo "=========================================="
 echo ""
-echo "正在启动服务器..."
-echo ""
 
 cd "$(dirname "$0")"
+
+# 自动更新 config.ini 中的 IP 地址
+if [ -f "update-config-ip.sh" ]; then
+    ./update-config-ip.sh
+fi
+
+echo ""
+echo "正在启动服务器..."
+echo ""
 
 # 检查8000端口是否被占用
 if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
